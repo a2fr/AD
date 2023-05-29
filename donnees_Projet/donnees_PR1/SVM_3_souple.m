@@ -18,14 +18,14 @@ function [X_VS,Y_VS,Alpha_VS,c,code_retour] = SVM_3_souple(X,Y,sigma,lambda)
     lb = zeros(n,1);
     ub = lambda*ones(n,1);
 
-    [alpha,~,code_retour] = quadprog(H,f,[],[],Aeq,beq,lb,ub);    
+    [alpha,~,code_retour] = quadprog(H,f,[],[],Aeq,beq,lb,ub);
 
-    idx = alpha>epsilon;
-    lidx = idx & (alpha<lambda);
-    Y_VS = Y(lidx);
-    Alpha_VS = alpha(lidx);
-
-    c = sum(Alpha_VS.*Y_VS.*K(lidx,1)) - 1/Y_VS(1);
+    %Use dot product of support vector xi with index i such that alpha_i < lambda
+    idx = alpha > epsilon;
     X_VS = X(idx,:);
+    Y_VS = Y(idx);
+    Alpha_VS = alpha(idx);
 
+    c = sum(Alpha_VS.*Y_VS.*K(idx,1)) - 1/Y_VS(1);
+  
 end

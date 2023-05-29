@@ -9,11 +9,9 @@ H = taille_ecran(4);
 
 load donnees_app;
 
-lambda = 10;
-
 % Donnees non filtrees :
-X = X_app_filtre;
-Y = Y_app_filtre;
+X = X_app;
+Y = Y_app;
 
 % Parametres d'affichage :
 pas = 0.001;
@@ -26,8 +24,9 @@ nom_carac_1 = 'Compacite';
 nom_carac_2 = 'Contraste';
 
 % Estimation du SVM avec noyau gaussien :
-sigma = 0.075;					% Ecart-type du noyau gaussien 0.075
-[X_VS,Y_VS,Alpha_VS,c,code_retour] = SVM_3_souple(X,Y,sigma,lambda);
+sigma = 0.01;					% Ecart-type du noyau gaussien
+lambda=1;
+[X_VS,Y_VS,Alpha_VS,c,code_retour] = SVM_3_souple(X,Y,sigma,lambda );
 
 % Si l'optimisation n'a pas converge :
 if code_retour ~= 1
