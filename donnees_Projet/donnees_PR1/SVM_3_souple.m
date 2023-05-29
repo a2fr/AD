@@ -20,7 +20,6 @@ function [X_VS,Y_VS,Alpha_VS,c,code_retour] = SVM_3_souple(X,Y,sigma,lambda)
 
     [alpha,~,code_retour] = quadprog(H,f,[],[],Aeq,beq,lb,ub);
 
-    %Use dot product of support vector xi with index i such that alpha_i < lambda
     idx = alpha > epsilon;
     X_VS = X(idx,:);
     Y_VS = Y(idx);
